@@ -12,7 +12,7 @@ services:
       - "traefik.http.routers.apostol_api.entrypoints=https"
       - "traefik.http.routers.apostol_api.tls=true"
       - "traefik.http.routers.apostol_api.tls.certresolver=letsencrypt"
-      - "traefik.http.routers.apostol_api.middlewares=redirect_https"
+      - "traefik.http.routers.apostol_api.middlewares=redirect-https"
       - "traefik.http.services.apostol_api.loadbalancer.server.port=8000"
     depends_on:
       - apostol_base
@@ -29,7 +29,7 @@ services:
       - "traefik.http.routers.apostol_front.entrypoints=https"
       - "traefik.http.routers.apostol_front.tls=true"
       - "traefik.http.routers.apostol_front.tls.certresolver=letsencrypt"
-      - "traefik.http.routers.apostol_front.middlewares=redirect_https"
+      - "traefik.http.routers.apostol_front.middlewares=redirect-https"
       - "traefik.http.services.apostol_front.loadbalancer.server.port=80"
     depends_on:
       - apostol_api
