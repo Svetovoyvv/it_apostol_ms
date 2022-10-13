@@ -4,14 +4,16 @@ services:
     container_name: apostol_api
     build: ./api
     environment:
-      - CORS_FRONTEND_URL=http://localhost:3000
+      - CORS_FRONTEND_URL=https://beta.it-apostol.ru
       - DB_CONNECTION_URI=postgresql+psycopg2://apostol:apostol@apostol_base/apostol
-    ports:
-      - "8000:8000"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.apostol_api.rule=Host(`beta.it-apostol.ru`) && PathPrefix(`/api`)"
-      - "traefik.http.routers.apostol_api.entrypoints=http"
+      - "traefik.http.routers.apostol_api.rule=Host(`beta.it-apostol.ru`) && PathPrefix(`/api`, `/docs`, `/redoc`, `/openapi.json`)"
+      - "traefik.http.routers.apostol_api.entrypoints=https"
+      - "traefik.http.routers.apostol_api.tls=true"
+      - "traefik.http.routers.apostol_api.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.apostol_api.middlewares=redirect_https"
+      - "traefik.http.services.apostol_api.loadbalancer.server.port=8000"
     depends_on:
       - apostol_base
 
@@ -19,16 +21,18 @@ services:
     container_name: apostol_front
     build: ./front
     environment:
-      - REACT_APP_API_URL=http://localhost:8000
+      - REACT_APP_API_URL=https://beta.it-apostol.ru
       - PORT=80
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.apostol_front.rule=Host(`beta.it-apostol.ru`)"
-      - "traefik.http.routers.apostol_front.entrypoints=http"
+      - "traefik.http.routers.apostol_front.entrypoints=https"
+      - "traefik.http.routers.apostol_front.tls=true"
+      - "traefik.http.routers.apostol_front.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.apostol_front.middlewares=redirect_https"
+      - "traefik.http.services.apostol_front.loadbalancer.server.port=80"
     depends_on:
       - apostol_api
-    ports:
-      - "3000:80"
   apostol_base:
     container_name: apostol_base
     image: postgres:13
