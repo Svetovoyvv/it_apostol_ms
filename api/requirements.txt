@@ -1,0 +1,11 @@
+pydantic~=1.10.2
+pydantic[email]
+uvicorn
+psycopg2
+python-multipart
+PyJWT~=2.5.0
+SQLAlchemy~=1.4.41
+passlib~=1.7.4
+loguru~=0.6.0
+fastapi~=0.85.0
+pyjwt

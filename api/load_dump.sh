@@ -1,0 +1,1 @@
+python3.10 load_db_from_json.py

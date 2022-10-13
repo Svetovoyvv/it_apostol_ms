@@ -1,0 +1,42 @@
+version: '2'
+services:
+  apostol_api:
+    container_name: apostol_api
+    build: ./api
+    environment:
+      - CORS_FRONTEND_URL=http://localhost:3000
+      - DB_CONNECTION_URI=postgresql+psycopg2://apostol:apostol@apostol_base/apostol
+    ports:
+      - "8000:8000"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.apostol_api.rule=Host(`beta.it-apostol.ru`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.apostol_api.entrypoints=http"
+    depends_on:
+      - apostol_base
+
+  apostol_front:
+    container_name: apostol_front
+    build: ./front
+    environment:
+      - REACT_APP_API_URL=http://localhost:8000
+      - PORT=80
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.apostol_front.rule=Host(`beta.it-apostol.ru`)"
+      - "traefik.http.routers.apostol_front.entrypoints=http"
+    depends_on:
+      - apostol_api
+    ports:
+      - "3000:80"
+  apostol_base:
+    container_name: apostol_base
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=apostol
+      - POSTGRES_USER=apostol
+      - POSTGRES_PASSWORD=apostol
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+
+    
