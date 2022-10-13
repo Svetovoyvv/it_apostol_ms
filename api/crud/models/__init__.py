@@ -10,6 +10,7 @@ if db_url.startswith('sqlite'):
 while True:
     try:
         engine = q.create_engine(db_url, connect_args=connect_args)
+        engine.connect()
         break
     except Exception: # noqa
         logger.info('Waiting for database')
