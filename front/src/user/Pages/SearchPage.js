@@ -128,7 +128,7 @@ export default function SearchPage() {
                                 }} key={index}>
                                     <Box sx={{
                                         display: "flex",
-                                        justifyContent: "space-between"
+                                        justifyContent: "space-between",
                                     }}>
                                         <Stack direction="row" alignItems="end" spacing={1}>
                                             <Typography variant="h5" fontWeight={600}>

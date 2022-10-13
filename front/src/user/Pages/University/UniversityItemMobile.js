@@ -1,11 +1,13 @@
 import {Box, Button, Collapse, Divider, List, ListItem, Paper, Popover, Typography} from "@mui/material";
 import {useState} from "react";
+import {useIsMobile} from "../../../hooks";
 
 export const UniversityItemMobile = ({name, description, studyDirections}) => {
     studyDirections = studyDirections ?? [];
     const [anchorElement, setAnchorElement] = useState(null);
     const [isOpened, setOpened] = useState(false);
     const [isHoverPopover, setHoverPopover] = useState(false);
+    const isMobile = useIsMobile();
     return <Paper sx={{
         padding: 2,
         borderRadius: 3
@@ -22,8 +24,9 @@ export const UniversityItemMobile = ({name, description, studyDirections}) => {
         <Divider sx={{marginY: 1}}/>
         <Box sx={{
             display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
+            justifyContent: isMobile ? "center" : "space-between",
+            alignItems: isMobile ? "start" : "center",
+            flexDirection: isMobile ? "column" : "row",
             paddingBottom: 1
         }}>
             <Box sx={{width: "60%", marginRight: 1}}>
