@@ -1,6 +1,6 @@
 import {createContext, useContext} from "react";
 import {useLocalStorage} from "../hooks";
-
+import {OpenAPI} from "../client";
 const AuthContext = createContext({
     isAuthorized: false,
     setAuthorized: (e) => {},
@@ -20,6 +20,9 @@ const AuthContextProvider = ({children}) => {
     const [userInfo, setUserInfo_] = useLocalStorage('userInfo', ctx_init.userInfo);
     const setUserInfo = (value) => {
         setUserInfo_({...userInfo, ...value});
+    }
+    if (userInfo.token !== undefined && userInfo.token !== '') {
+        OpenAPI.TOKEN = userInfo.token;
     }
     const context = {
         isAuthorized,

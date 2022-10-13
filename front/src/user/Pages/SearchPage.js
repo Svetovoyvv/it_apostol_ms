@@ -62,7 +62,7 @@ export default function SearchPage() {
                                     maskChar="_"
                                     name="ins_number"
                                 >
-                                    {() => <TextField label="СНИЛС" name="ins_number" error={
+                                    {() => <TextField autoComplete="on" label="СНИЛС" name="ins_number" error={
                                         insNumber.match(/^[0-9]{3}[ -][0-9]{3}[ -][0-9]{3}[ -][0-9]{2}$|^[_-]+$/) === null
                                     }/>}
                                 </InputMask>
@@ -108,21 +108,23 @@ export default function SearchPage() {
                         </Stack>
                     </Paper>
                     <Box sx={{
-                        width: isMobile ? "90%" : "70%"
+                        width: isMobile ? "90%" : "70%",
+                        paddingTop: 4
                     }}>
                         <Collapse in={isSuccess}>
                         <Box sx={{
                             width: "100%",
                             display: "flex",
                             gap: 2,
-                            flexWrap: isMobile ? "wrap" : "nowrap",
+                            flexWrap:  "wrap",
+                            justifyContent: "space-between"
                         }}>
                             {response.map((item, index) => (
                                 <Paper sx={{
-                                    width: isMobile ? "100%" : "50%",
+                                    width: isMobile ? "100%" : "45%",
                                     padding: 2,
                                     backgroundColor: item.agreed ? "#c8e6c9" : "#ffcdd2",
-                                    borderRadius: 4
+                                    borderRadius: 4,
                                 }} key={index}>
                                     <Box sx={{
                                         display: "flex",

@@ -74,12 +74,12 @@ export default function AuthModal({isOpened, setOpened}) {
                                     setIsLoading(true);
                                     UserService.loginApiV1UserLoginPost({username: email, password: password}).then((res) => {
                                         ctx.setUserInfo({token: res.access_token});
-                                        console.log(res);
                                         OpenAPI.TOKEN = res.access_token;
                                         UserService.profileApiV1UserProfileGet().then((res) => {
                                             ctx.setUserInfo({
                                                 email: res.email,
                                                 name: res.username,
+                                                token: OpenAPI.TOKEN
                                             });
                                             setIsLoading(false);
                                             ctx.setAuthorized(true);
