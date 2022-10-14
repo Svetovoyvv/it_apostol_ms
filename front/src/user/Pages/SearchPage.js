@@ -129,8 +129,9 @@ export default function SearchPage() {
                                     <Box sx={{
                                         display: "flex",
                                         justifyContent: "space-between",
+                                        flexWrap: "wrap",
                                     }}>
-                                        <Stack direction="row" alignItems="end" spacing={1}>
+                                        <Stack direction="row" alignItems="end" spacing={1} paddingRight={2}>
                                             <Typography variant="h5" fontWeight={600}>
                                                 {item.university.display_name}
                                             </Typography>
