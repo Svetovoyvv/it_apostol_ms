@@ -15,6 +15,9 @@ services:
       - "traefik.http.routers.apostol_api.tls.certresolver=letsencrypt"
       - "traefik.http.routers.apostol_api.middlewares=redirect-https"
       - "traefik.http.services.apostol_api.loadbalancer.server.port=8000"
+      - "traefik.http.routers.apostol_api_http.rule=Host(`beta.it-apostol.ru`) && PathPrefix(`/api`, `/docs`, `/redoc`, `/openapi.json`)"
+      - "traefik.http.routers.apostol_api_http.entrypoints=http"
+      - "traefik.http.routers.apostol_api_http.middlewares=redirect-https"
     depends_on:
       - apostol_base
 
@@ -32,6 +35,9 @@ services:
       - "traefik.http.routers.apostol_front.tls.certresolver=letsencrypt"
       - "traefik.http.routers.apostol_front.middlewares=redirect-https"
       - "traefik.http.services.apostol_front.loadbalancer.server.port=80"
+      - "traefik.http.routers.apostol_front_http.rule=Host(`beta.it-apostol.ru`)"
+      - "traefik.http.routers.apostol_front_http.entrypoints=http"
+      - "traefik.http.routers.apostol_front_http.middlewares=redirect-https"
     depends_on:
       - apostol_api
   apostol_base:
