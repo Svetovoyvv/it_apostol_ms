@@ -6,6 +6,7 @@ services:
     environment:
       - CORS_FRONTEND_URL=https://beta.it-apostol.ru
       - DB_CONNECTION_URI=postgresql+psycopg2://apostol:apostol@apostol_base/apostol
+      - ACCESS_TOKEN_EXPIRE_SECONDS=2592000
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.apostol_api.rule=Host(`beta.it-apostol.ru`) && PathPrefix(`/api`, `/docs`, `/redoc`, `/openapi.json`)"
