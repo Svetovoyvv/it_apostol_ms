@@ -7,5 +7,5 @@ RUN npm install --legacy-peer-deps
 COPY . .
 RUN npm run build
 RUN npm install -g serve
-RUN echo "serve -s build -l $PORT" > start.sh
+RUN echo "serve -s build" > start.sh
 CMD ["/bin/bash", "start.sh"]
