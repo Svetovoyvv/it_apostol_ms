@@ -1,7 +1,6 @@
 import {Box, Container, Stack, Toolbar, Typography} from "@mui/material";
 
-export default function Error404Page({description}){
-    const descriptionText = description ?? '';
+export default function Error404Page({description}){;
     return <>
         <Toolbar/>
         <Container>
@@ -11,16 +10,11 @@ export default function Error404Page({description}){
                 marginTop: 5
             }}>
                 <Stack>
-                    <Typography variant="h2" textAlign="center">
+                    <Typography variant="h3" textAlign="center">
                         404
                     </Typography>
-                    { descriptionText.length > 0 ?
-                        <Typography variant="h2" textAlign="center">
-                            Description: {descriptionText}
-                        </Typography> : null
-                    }
                     <Typography variant="h3" textAlign="center">
-                        Пашол нахуй
+                        {description ?? "Страница не найдена"}
                     </Typography>
 
                 </Stack>
