@@ -7,6 +7,7 @@ services:
       - CORS_FRONTEND_URL=https://beta.it-apostol.ru
       - DB_CONNECTION_URI=postgresql+psycopg2://apostol:apostol@apostol_base/apostol
       - ACCESS_TOKEN_EXPIRE_SECONDS=2592000
+      - JWT_SECRET_KEY=acda41120c46438d224107662457d2f16bae70e901e54047989a5487ffccdfdb23171b333ee926cbded5e9b48e3e17fe821513f663ae48bd2f99047cfe6a896e
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.apostol_api.rule=Host(`beta.it-apostol.ru`) && PathPrefix(`/api`, `/docs`, `/redoc`, `/openapi.json`)"
