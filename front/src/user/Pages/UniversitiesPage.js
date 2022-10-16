@@ -4,8 +4,9 @@ import {
     Stack,
     Toolbar,
     Typography,
+    IconButton
 } from "@mui/material";
-
+import UpdateIcon from '@mui/icons-material/Update';
 import {UniversityItemMobile} from "./University/UniversityItemMobile";
 import {UniversitiesService} from "../../client";
 import {useIsMobile, useLocalStorage} from "../../hooks";
@@ -14,10 +15,13 @@ export default function UniversitiesPage() {
     const isMobile = useIsMobile();
     const UniversityItem = isMobile ? UniversityItemMobile : UniversityItemMobile;
     const [universities, setUniversities] = useLocalStorage("universities", []);
-    if (universities.length === 0) {
+    const updateUniversities = () => {
         UniversitiesService.getAllUniversitiesApiV1UniversitiesGet().then(res => {
             setUniversities(res);
         })
+    }
+    if (universities.length === 0) {
+        updateUniversities()
     }
     return <>
         <Toolbar/>
@@ -29,12 +33,18 @@ export default function UniversitiesPage() {
                 marginTop: 1,
                 flexDirection: "column"
             }}>
-                <Typography variant="h4" fontWeight="900" sx={{
-                    textAlign: "center",
-                    marginBottom: 2
-                }}>
-                    Список поддерживаемых ВУЗов
-                </Typography>
+                <Stack direction="row" marginBottom={2} spacing={2}>
+                    <Typography variant="h4" fontWeight="900" sx={{
+                        textAlign: "center",
+                    }}>
+                        Список поддерживаемых ВУЗов
+                    </Typography>
+                    <IconButton size="large" onClick={() => {
+                        updateUniversities()
+                    }}>
+                        <UpdateIcon/>
+                    </IconButton>
+                </Stack>
                 <Box sx={{
                     width: "100%",
                     maxWidth: 800,
